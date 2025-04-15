@@ -7,8 +7,8 @@ module Ec2Ipv4Retriever
   class Error < StandardError; end
 
   def find_ip_by_ec2_name(region: 'us-east-1', ec2_name:)
-    ec2_resource = ::Aws::EC2::Resource.new(region:)
-    ec2_instance = pull_ec2_instance_by_tag_name(ec2_resource:, ec2_name:)
+    ec2_resource = ::Aws::EC2::Resource.new(region: region)
+    ec2_instance = pull_ec2_instance_by_tag_name(ec2_resource: ec2_resource, ec2_name: ec2_name)
 
     ec2_instance.nil? ? nil : ec2_instance.private_ip_address
   end
